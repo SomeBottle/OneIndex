@@ -34,3 +34,9 @@ if ($rule_0 = "21"){
 rewrite ^/(.*)$ /index.php?/$1 last;  
 }  
  ```
+ 
+ 程序安装失败错误：
+ * 访问<https://apps.dev.microsoft.com/#/appList>  
+ * 删除原有的oneindex应用  
+ * 重试安装  
+ * 其余还有跳转问题： <https://github.com/donwa/oneindex/issues/118>  
