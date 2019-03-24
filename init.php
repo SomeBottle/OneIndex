@@ -148,3 +148,4 @@ function get_absolute_path($path) {
 onedrive::$client_id = config('client_id');
 onedrive::$client_secret = config('client_secret');
 onedrive::$redirect_uri = config('redirect_uri');
+oneindex::check_refresh_config();

@@ -96,6 +96,10 @@ class AdminController{
 			$rf=oneindex::refresh_cache(get_absolute_path(config('onedrive_root')));
 			if($rf=='failed'){/*添加失败提示*/
 				$message = "重建缓存失败";
+			}else if($rf=='timefailed'){/*添加失败提示*/
+			    require dirname(__FILE__).'/../config/refreshfix.php';
+				$left=date('H:i:s',intval($rconfig['nextrefresh']));
+				$message = '未到缓存更新允许时间:'.$left;
 			}
 		}
 		return view::load('cache')->with('message', $message);

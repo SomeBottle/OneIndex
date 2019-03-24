@@ -9,6 +9,14 @@ Oneindex Bottle Edition.
 于是我修改了一下，**缓解了**部分问题.稍后可能会加入更多功能.  
 
 ## 修改内容  
+* 自动判断HTTP 429请求过多的错误，并自动限制刷新的时间间隔，自动调整刷新周期.(如果没有到周期会返回提示)↓
+  
+  ![](https://ww2.sinaimg.cn/large/ed039e1fgy1g1dncyfprgj20iw0acwee)  
+  
+  ![](https://ww2.sinaimg.cn/large/ed039e1fgy1g1dnd9mrelj20dq02bt8l)  
+  
+  详细配置可以自行去*/config/refreshfix.php*进行修改，refreshinterval是刷新允许周期，maxretrytime是自动调整周期前允许重试的次数.  
+  
 * 防止request失败导致的空文件目录.(（づ￣3￣）づ拒绝首页空白)   
 * 增加**简单的**状态码&出错日志(在/lib目录下生成).(requestcode.txt & requestlog.php)  
 * 在**nexmoe主题**增加了一次性缩略图的加载限制，最多预览五十张（防止请求过多被限制）  
@@ -18,9 +26,10 @@ Oneindex Bottle Edition.
 ## 店长推荐（误  
  选项推荐：  
  * token:一小时  
- * cache:10分钟  
+ * cache:20分钟  
  * 缓存类型:filecache  
  * 缓存过期时间（秒）：86400  
+ * 自动调整周期前允许重试的次数：2  
  
  Nginx伪静态规则： 
  ```

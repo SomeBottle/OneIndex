@@ -3,14 +3,38 @@
 		static $dir = array();
 		static $file = array();
 		static $thumb = array();
-
+        
+		/*检查刷新时间控制的配置是否生成*/
+		static function check_refresh_config(){
+			$path=dirname(__FILE__);
+			if(!is_dir($path.'/../config')){
+				mkdir($path.'/../config');
+			}
+			if(!file_exists($path.'/../config/refreshfix.php')){
+				$r=array();
+				$r['refreshinterval']=1200;
+				$r['nextrefresh']=0;
+				$r['retrytime']=0;
+				$r['maxretrytime']=2;
+				file_put_contents($path.'/../config/refreshfix.php','<?php $rconfig='.var_export($r,true).';?>');
+			}
+		}
 		//使用 $refresh_token，获取 $access_token
 		static function get_token($refresh_token){
 			
 		}
-
-		// 刷新缓存
-		static function refresh_cache($path){
+		/*中转refreshcache，原refreshcache写法有多层循环*/
+        static function refresh_cache($path){
+			require dirname(__FILE__).'/../config/refreshfix.php';
+			if(time()>=intval($rconfig['nextrefresh'])){
+			   $rt=self::real_refresh_cache($path);
+			   return $rt;
+			}else{/*未到刷新时间*/
+				return 'timefailed';
+			}
+		}
+		// 真-刷新缓存
+		static function real_refresh_cache($path){
 			set_time_limit(0);
 			if( php_sapi_name() == "cli" ){
 			   echo $path.PHP_EOL;
@@ -25,7 +49,7 @@
 			}
 			foreach((array)$items as $item){
 			    if($item['folder']){
-			        self::refresh_cache($path.$item['name'].'/');
+			        self::real_refresh_cache($path.$item['name'].'/');
 			    }
 			}
 		}

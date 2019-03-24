@@ -15,7 +15,11 @@ class one{
 	static function cache_refresh(){
 		$rf=oneindex::refresh_cache(get_absolute_path(config('onedrive_root')));
 		if($rf=='failed'){
-			echo 'Failed';
+			echo 'Failed'.PHP_EOL;
+		}else if($rf=='timefailed'){
+			require dirname(__FILE__).'/config/refreshfix.php';
+			$left=date('H:i:s',intval($rconfig['nextrefresh']));
+			echo 'Cache Refresh will be available at:'.$left.PHP_EOL;
 		}
 	}
 
