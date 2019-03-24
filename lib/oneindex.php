@@ -31,6 +31,7 @@
 			   $rconfig['nextrefresh']=time()+intval($rconfig['refreshinterval']);
 			   file_put_contents(dirname(__FILE__).'/../config/refreshfix.php','<?php $rconfig='.var_export($rconfig,true).';?>');/*储存一遍时间*/
 			   $rt=self::real_refresh_cache($path);
+			   file_put_contents(dirname(__FILE__).'/../lastupdate.txt',date('Y-m-d h:i:sa',time()));
 			   return $rt;
 			}else{/*未到刷新时间*/
 				return 'timefailed';
@@ -46,7 +47,6 @@
 			if($items=='error'){/*报错中止*/
 				return 'failed';
 			}
-			file_put_contents('lastupdate.txt',date('Y-m-d h:i:sa',time()));
 			if(is_array($items)&&$items!=='error'){
 				cache::set('dir_'.$path, $items, config('cache_expire_time') );
 			}
