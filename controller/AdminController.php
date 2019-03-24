@@ -3,7 +3,7 @@ define('VIEW_PATH', ROOT.'view/admin/');
 class AdminController{
 	static $default_config = array(
 	  'site_name' =>'OneIndex',
-	  'password' => 'oneindex',
+	  'password' => '5d607c0cbd801f4fdec24f9f36d2c32a',/*修改为md5*/
 	  'style'=>'material',
 	  'onedrive_root' =>'',
 	  'cache_type'=>'secache',
@@ -27,7 +27,7 @@ class AdminController{
 	}
 
 	function login(){
-		if(!empty($_POST['password']) && $_POST['password'] == config('password')){
+		if(!empty($_POST['password']) && md5($_POST['password']) == config('password')){/*密文保存密码*/
 			setcookie('admin', md5(config('password').config('refresh_token')) );
 			return view::direct(get_absolute_path(dirname($_SERVER['SCRIPT_NAME'])).'?/admin/');
 		}
@@ -140,9 +140,9 @@ class AdminController{
 
 	function setpass(){
 		if($_SERVER['REQUEST_METHOD'] == 'POST'){
-			if($_POST['old_pass'] == config('password')){
+			if(md5($_POST['old_pass']) == config('password')){/*密文保存*/
 				if($_POST['password'] == $_POST['password2']){
-					config('password', $_POST['password']);
+					config('password', md5($_POST['password']));
 					$message = "修改成功";
 				}else{
 					$message = "两次密码不一致，修改失败";
