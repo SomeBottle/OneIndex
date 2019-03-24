@@ -26,7 +26,10 @@
 		/*中转refreshcache，原refreshcache写法有多层循环*/
         static function refresh_cache($path){
 			require dirname(__FILE__).'/../config/refreshfix.php';
+			date_default_timezone_set("Asia/Shanghai");
 			if(time()>=intval($rconfig['nextrefresh'])){
+			   $rconfig['nextrefresh']=time()+intval($rconfig['refreshinterval']);
+			   file_put_contents(dirname(__FILE__).'/../config/refreshfix.php','<?php $rconfig='.var_export($rconfig,true).';?>');/*储存一遍时间*/
 			   $rt=self::real_refresh_cache($path);
 			   return $rt;
 			}else{/*未到刷新时间*/

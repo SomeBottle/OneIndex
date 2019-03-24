@@ -100,8 +100,6 @@
 
 		//通过分页获取页面所有item
 		static function dir_next_page($request, &$items, $retry=0,$skipcheck=false){
-			require dirname(__FILE__).'/../config/refreshfix.php';
-			$rconfig['nextrefresh']=time()+intval($rconfig['refreshinterval']);
 			$resp = fetch::get($request);
 			$data = json_decode($resp->content, true);
 			/*------刷新出错判断模块------*/
@@ -125,16 +123,17 @@
 			}
 			if($erroroccur){/*报错中止*/
 			    if(intval($rqcode)==429){/*请求过多处理*/
+				    require dirname(__FILE__).'/../config/refreshfix.php';
 					if(intval($rconfig['retrytime'])>=intval($rconfig['maxretrytime'])){
 					   $rconfig['refreshinterval']=intval($rconfig['refreshinterval'])+600;/*尝试失败自动加长(10分钟)刷新周期*/
 					   $rconfig['retrytime']=0;
 					}else{
 						$rconfig['retrytime']=intval($rconfig['retrytime'])+1;
 					}
+					file_put_contents(dirname(__FILE__).'/../config/refreshfix.php','<?php $rconfig='.var_export($rconfig,true).';?>');
 				}
 				return 'error';
 			}
-			file_put_contents(dirname(__FILE__).'/../config/refreshfix.php','<?php $rconfig='.var_export($rconfig,true).';?>');
 			foreach((array)$data['value'] as $item){
 				//var_dump($item);
 				$items[$item['name']] = array(
