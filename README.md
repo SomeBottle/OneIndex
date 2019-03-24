@@ -44,7 +44,9 @@ if ($rule_0 = "21"){
 rewrite ^/(.*)$ /index.php?/$1 last;  
 }  
  ```
- 
+ 周期限制不起效？！
+ * 请注意您的/config目录下的文件是否可读，php有时候会出现permission denied问题  
+
  程序安装失败错误：
  * 访问<https://apps.dev.microsoft.com/#/appList>  
  * 删除原有的oneindex应用  
