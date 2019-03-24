@@ -9,6 +9,7 @@ Oneindex Bottle Edition.
 于是我修改了一下，**缓解了**部分问题.稍后可能会加入更多功能.  
 
 ## 修改内容  
+* 密码md5密文保存  
 * 自动判断HTTP 429请求过多的错误，并自动限制刷新的时间间隔，自动调整刷新周期.(如果没有到周期会返回提示)↓
   
   ![](https://ww2.sinaimg.cn/large/ed039e1fgy1g1dncyfprgj20iw0acwee)  
