@@ -110,10 +110,12 @@
 				file_put_contents($logpath,'<?php $errorlog=""; ?>');
 			}
 			if(intval($rqcode)!==200||array_key_exists('error',$data)||array_key_exists('error_description',$data)||empty($resp->content)){
-		    $erroroccur=true;
-			require $logpath;
-			$errorlog=$errorlog.'ERROR TIME:'.date("Y-m-d h:i:sa",time()). PHP_EOL .var_export($resp,true).PHP_EOL;
-			file_put_contents($logpath,'<?php $errorlog="'.$errorlog.'"; ?>');
+				if(intval($rqcode)!==404){
+		          $erroroccur=true;
+			      require $logpath;
+			      $errorlog=$errorlog.'ERROR TIME:'.date("Y-m-d h:i:sa",time()). PHP_EOL .var_export($resp,true).PHP_EOL;
+			      file_put_contents($logpath,'<?php $errorlog="'.$errorlog.'"; ?>');
+				}
 			}
 			file_put_contents(dirname(__FILE__) . '/requestcode.txt',$rqcode);
 			/*结束判断*/
