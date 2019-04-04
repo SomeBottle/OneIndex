@@ -26,8 +26,9 @@ Oneindex Bottle Edition.
 
 ## 店长推荐（误  
  选项推荐：  
- * token:一小时  
- * cache:20分钟  
+ * token:两小时  
+ * cache:30分钟
+   **注意，base.php中cache_refresh_time这个配置也要对应调整为1800(秒)**
  * 缓存类型:filecache  
  * 缓存过期时间（秒）：86400  
  * 自动调整周期前允许重试的次数：2  
