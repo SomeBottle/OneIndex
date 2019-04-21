@@ -23,6 +23,7 @@ Oneindex Bottle Edition.
 * 在**nexmoe主题**增加了一次性缩略图的加载限制，最多预览五十张（防止请求过多被限制）  
 * 增加缓存刷新结果，如果刷新失败，后台会显示**重建缓存失败**，CLI模式在one.php执行刷新时如果失败会返回**Failed**  
   ![Example](https://ww2.sinaimg.cn/large/ed039e1fgy1g15sddvme4j20bg0650sh)  
+* 文件缓存过期**引用时**自动刷新   
 
 ## 店长推荐（误  
  选项推荐：  

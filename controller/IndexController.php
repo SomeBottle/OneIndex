@@ -68,6 +68,7 @@ class IndexController{
 
 	//文件
 	function file(){
+		$urluse=false;
 		$item = $this->items[$this->name];
 		if ($item['folder']) {//是文件夹
 			$url = $_SERVER['REQUEST_URI'].'/';
@@ -77,8 +78,23 @@ class IndexController{
 			return $this->show($item);
 		}else{//返回下载链接
 			$url = $item['downloadUrl'];
+			$urluse=true;
 		}
-		header('Location: '.$url);
+		if($urluse){/*如果是直链，检查文件是否可用*/
+			$resp = fetch::get($url);
+			if($resp->http_code == 200){
+				header('Location: '.$url);
+			}else{/*不可用就刷新缓存*/
+			    header('Location: https://i.loli.net/2019/04/21/5cbc40e161174.jpg');
+				$path=dirname(__FILE__);
+				require $path.'/../config/refreshfix.php';
+				$rconfig['nextrefresh']=0;
+				file_put_contents($path.'/../config/refreshfix.php','<?php $rconfig='.var_export($rconfig,true).';?>');
+				oneindex::refresh_cache(get_absolute_path(config('onedrive_root')));
+			}
+		}else{
+		  header('Location: '.$url);
+		}
 	}
 
 
@@ -141,7 +157,6 @@ class IndexController{
 				return view::load('show/'.$n)->with($data);
 			}
 		}
-
 		header('Location: '.$item['downloadUrl']);
 	}
 	//缩略图
