@@ -88,7 +88,7 @@ class IndexController{
 		}
 		if($urluse){/*如果是直链，检查文件是否可用*/
 			$resp = fetch::get($url);
-			if(codejudge($resp->http_code)){
+			if($this->codejudge($resp->http_code)){
 				header('Location: '.$url);
 			}else{/*不可用就刷新缓存*/
 			    header('Location: https://i.loli.net/2019/04/21/5cbc40e161174.jpg');
