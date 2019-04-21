@@ -65,7 +65,13 @@ class IndexController{
 		echo view::load('password')->with('navs',$navs);
 		exit();
 	}
-
+    function codejudge($num){/*判断状态码是不是2xx*/
+		$s=strlen($num);
+        $t=substr($num,0,1);
+        if($s==3&&intval($t)==2){
+	       return true;
+        }
+	}
 	//文件
 	function file(){
 		$urluse=false;
@@ -82,7 +88,7 @@ class IndexController{
 		}
 		if($urluse){/*如果是直链，检查文件是否可用*/
 			$resp = fetch::get($url);
-			if($resp->http_code == 200){
+			if(codejudge($resp->http_code)){
 				header('Location: '.$url);
 			}else{/*不可用就刷新缓存*/
 			    header('Location: https://i.loli.net/2019/04/21/5cbc40e161174.jpg');
