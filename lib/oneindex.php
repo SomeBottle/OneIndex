@@ -46,6 +46,7 @@
 		// 真-刷新缓存
 		static function real_refresh_cache($path){
 			set_time_limit(0);
+			ignore_user_abort();
 			if( php_sapi_name() == "cli" ){
 			   echo $path.PHP_EOL;
 			}
