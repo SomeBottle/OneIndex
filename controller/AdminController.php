@@ -100,6 +100,8 @@ class AdminController{
 			    require dirname(__FILE__).'/../config/refreshfix.php';
 				$left=date('H:i:s',intval($rconfig['nextrefresh']));
 				$message = '未到缓存更新允许时间:'.$left;
+			}else if($rf=='refreshing'){/*添加刷新中提示*/
+				$message = '刷新中';
 			}
 		}
 		return view::load('cache')->with('message', $message);
