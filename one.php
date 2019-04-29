@@ -20,6 +20,8 @@ class one{
 			require dirname(__FILE__).'/config/refreshfix.php';
 			$left=date('H:i:s',intval($rconfig['nextrefresh']));
 			echo 'Cache Refresh will be available at:'.$left.PHP_EOL;
+		}else if($rf=='refreshing'){
+			echo 'Cache Refreshing.'.PHP_EOL;
 		}
 	}
 
