@@ -16,7 +16,7 @@ Oneindex Bottle Edition.
   
   ![](https://ww2.sinaimg.cn/large/ed039e1fgy1g1dnd9mrelj20dq02bt8l)  
   
-  详细配置可以自行去*/config/refreshfix.php*进行修改，refreshinterval是刷新允许周期，maxretrytime是自动调整周期前允许重试的次数.  
+  详细配置可以自行去 */config/refreshfix.php* 进行修改，refreshinterval是刷新允许周期，maxretrytime是自动调整周期前允许重试的次数.  
   
 * 防止request失败导致的空文件目录.(（づ￣3￣）づ拒绝首页空白)   
 * 增加**简单的**状态码&出错日志(在/lib目录下生成).(requestcode.txt & requestlog.php)  
@@ -27,12 +27,12 @@ Oneindex Bottle Edition.
 
 ## 店长推荐（误  
  选项推荐：  
- * token自动刷新:两小时  
- * cache自动刷新:30分钟
- * base.php中**cache_refresh_time**:3600(秒)
- * 缓存类型:filecache  
- * 缓存过期时间（秒）：86400  
- * 自动调整周期前允许重试的次数：8  
+ * token自动刷新: 两小时  
+ * cache自动刷新: 30分钟
+ * base.php中**cache_refresh_time**: 3600(秒)
+ * 缓存类型: filecache  
+ * 缓存过期时间（秒）: 86400  
+ * 自动调整周期前允许重试的次数: 8  
  
  Nginx伪静态规则： 
  ```
