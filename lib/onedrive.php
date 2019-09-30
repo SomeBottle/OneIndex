@@ -63,7 +63,12 @@ class onedrive
         }
         else
         {
-            $refresh_token = config('refresh_token');
+            // 从token.php中获取最新的刷新令牌，不存在则获取base.php中的初始刷新令牌
+            if (empty($token) || empty($token['refresh_token'])) {
+                $refresh_token = config('refresh_token');
+            } else {
+                $refresh_token = $token['refresh_token'];
+            }
             $token = self::get_token($refresh_token);
             if (!empty($token['refresh_token']))
             {
