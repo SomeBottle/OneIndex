@@ -1,4 +1,3 @@
-![预览图](https://wall.xtaolink.cn/e)
 
 <h1 align="center"><a href="https://github.com/SomeBottle/OneIndex" target="_blank">OneIndex</a></h1>
 
