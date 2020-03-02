@@ -13,6 +13,10 @@
 <img alt="Download" src="https://img.shields.io/badge/download-85.2KB-brightgreen.svg"/>
 </p>
 
+## 停止更新
+因为程序可维护性不高，目前不再对这个仓库进行维护。取而代之的是另一个项目：  
+https://github.com/SomeBottle/OdIndex  
+
 ## 缘由  
 之前听网友介绍了入了one的大门，结果鼓捣oneindex时我的历程很不顺利，一会儿文件列表出不来，一会儿jwt token又过期了...   
 于是我修改了一下，**缓解了**部分问题.稍后可能会加入更多功能.  
